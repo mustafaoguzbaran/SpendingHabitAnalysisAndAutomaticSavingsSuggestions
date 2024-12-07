@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Harcama Listesi{% endblock title %}
+{% block content %}
+<h1>Harcama Listesi</h1>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Tarih</th>
+      <th>Kategori</th>
+      <th>Tutar</th>
+      <th>Açıklama</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+    <tr>
+      <td>{{ expense.date }}</td>
+      <td>{{ expense.category }}</td>
+      <td>{{ expense.amount }}</td>
+      <td>{{ expense.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'add_expense' %}" class="btn btn-primary">Harcama Ekle</a>
+{% endblock content %}
