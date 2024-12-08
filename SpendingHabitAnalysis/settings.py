@@ -16,8 +16,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',  # accounts uygulaması eklendi
-    'expenses',  # expenses uygulaması eklendi
+    'accounts',
+    'expenses',
+    'processing'
 ]
 
 MIDDLEWARE = [
