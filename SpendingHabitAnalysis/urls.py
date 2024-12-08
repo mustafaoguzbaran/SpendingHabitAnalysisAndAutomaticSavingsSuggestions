@@ -9,5 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('accounts/', include('accounts.urls')),
-    path('expenses/', include('expenses.urls')),  # Expenses URL'leri eklendi
+    path('expenses/', include('expenses.urls')),
+    path('data/', include('processing.urls')),
 ]
