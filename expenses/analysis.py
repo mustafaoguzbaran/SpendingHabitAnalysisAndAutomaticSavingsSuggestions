@@ -1,5 +1,7 @@
 import datetime
 from django.db.models import Sum
+from datetime import date, timedelta
+
 from .models import Expense
 from sklearn.linear_model import LinearRegression
 import numpy as np
@@ -44,3 +46,27 @@ def generate_savings_suggestion(user):
         "suggestion": f"Gelecek ay tahmini harcamanız {future_spending_pred:.2f} TL. " \
                       f"Bu tutardan yaklaşık {saving_suggestion:.2f} TL tasarruf edebilirsiniz."
     }
+
+
+def get_monthly_spending_data(user, months=6):
+    today = date.today()
+    start_date = today - datetime.timedelta(days=months * 30)
+
+    data = (
+        Expense.objects
+        .filter(user=user, date__gte=start_date, date__lte=today)
+        .values('date__year', 'date__month')
+        .annotate(total=Sum('amount'))
+        .order_by('date__year', 'date__month')
+    )
+
+    labels = []
+    values = []
+    for record in data:
+        year = record['date__year']
+        month = record['date__month']
+        total = record['total']
+        labels.append(f"{year}-{month:02d}")
+        values.append(float(total))
+
+    return labels, values

@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .analysis import generate_savings_suggestion
+from .analysis import generate_savings_suggestion, get_monthly_spending_data
 from .models import Expense
 from .forms import ExpenseForm
 
@@ -30,3 +30,11 @@ def add_expense_view(request):
 def savings_suggestion_view(request):
     suggestion = generate_savings_suggestion(request.user)
     return JsonResponse(suggestion)
+
+@login_required
+def monthly_spending_chart(request):
+    labels, values = get_monthly_spending_data(request.user, months=6)
+    return render(request, 'expenses/monthly_spending_chart.html', {
+        'labels': labels,
+        'values': values
+    })
