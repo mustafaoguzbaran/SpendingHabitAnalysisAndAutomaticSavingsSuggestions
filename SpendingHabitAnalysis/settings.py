@@ -35,7 +35,7 @@ ROOT_URLCONF = 'SpendingHabitAnalysis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Uygulama bazlı template dizinlerini kullanıyoruz
+        'DIRS': [BASE_DIR / 'templates'],  # Uygulama bazlı template dizinlerini kullanıyoruz
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
