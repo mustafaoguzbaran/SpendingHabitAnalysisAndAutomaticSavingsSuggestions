@@ -40,7 +40,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         suggestion = generate_savings_suggestion(obj)
         return suggestion.get('predicted_future_spending', 'Bilgi yok')
 
-    predicted_future_spending.short_description = "Tahmini Gelecek Harcaması"
+    predicted_future_spending.short_description = "Tahmini Gelecek Ay Harcaması"
 
     def suggested_savings(self, obj):
         suggestion = generate_savings_suggestion(obj)

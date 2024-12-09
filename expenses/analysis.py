@@ -83,3 +83,16 @@ def get_monthly_spending_data(user, months=6):
         values.append(float(total))
 
     return labels, values
+
+def get_top_category(user):
+    top_cat = (
+        Expense.objects
+        .filter(user=user)
+        .values('category__name')
+        .annotate(total=Sum('amount'))
+        .order_by('-total')
+        .first()
+    )
+    if top_cat:
+        return top_cat['category__name'], float(top_cat['total'])
+    return None, 0.0
