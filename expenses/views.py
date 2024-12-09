@@ -1,6 +1,9 @@
 # expenses/views.py
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from .analysis import generate_savings_suggestion
 from .models import Expense
 from .forms import ExpenseForm
 
@@ -21,3 +24,9 @@ def add_expense_view(request):
     else:
         form = ExpenseForm()
     return render(request, 'expenses/add_expense.html', {'form': form})
+
+
+@login_required
+def savings_suggestion_view(request):
+    suggestion = generate_savings_suggestion(request.user)
+    return JsonResponse(suggestion)
