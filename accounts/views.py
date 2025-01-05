@@ -9,11 +9,9 @@ class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
-        # Giriş başarılı olunca 'home' isimli URL'e yönlendirir
         return reverse_lazy('home')
 
 class UserLogoutView(LogoutView):
-    # Çıkış yapıldığında 'home' isimli URL'e yönlendirir
     template_name = 'accounts/logout.html'
     next_page = reverse_lazy('home')
 

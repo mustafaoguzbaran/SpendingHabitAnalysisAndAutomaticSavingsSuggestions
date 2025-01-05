@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
-{% block title %}Harcama Ekle{% endblock title %}
+
+{% block title %}Harcama Ekle{% endblock %}
+
 {% block content %}
-<h1>Harcama Ekle</h1>
-<form method="post" class="card card-body shadow-sm">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-success w-100">Kaydet</button>
-</form>
-<a href="{% url 'expense_list' %}" class="btn btn-link mt-3">Harcama Listesine Dön</a>
-{% endblock content %}
+<div class="expense-container">
+    <h1>Harcama Ekle</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error-message">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <input type="submit" value="Kaydet" class="btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock %}

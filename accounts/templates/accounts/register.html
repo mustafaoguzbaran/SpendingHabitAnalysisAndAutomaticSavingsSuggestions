@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Kayıt Ol</title>
-</head>
-<body>
-    <h1>Kayıt Ol</h1>
-    <form method="post">
+{% extends 'base.html' %}
+
+{% block title %}Kayıt Ol{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Kayıt Ol</h2>
+    <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Kayıt Ol</button>
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success w-100">Kayıt Ol</button>
+        </div>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

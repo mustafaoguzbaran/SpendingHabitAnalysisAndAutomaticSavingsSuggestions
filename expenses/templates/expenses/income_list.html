@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Gelir Listesi{% endblock %}
+
+{% block content %}
+<div class="income-container">
+    <h1>Gelir Listesi</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Kaynak</th>
+                <th>Kategori</th>
+                <th>Tutar</th>
+                <th>Açıklama</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for income in incomes %}
+            <tr>
+                <td>{{ income.date }}</td>
+                <td>{{ income.source }}</td>
+                <td>{{ income.category.name }}</td>
+                <td>{{ income.amount }}</td>
+                <td>{{ income.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_income' %}" class="btn btn-primary">Yeni Gelir Ekle</a>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Spending Habit Analysis {% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="navbar">
+        <div class="logo">SpendingHabitAnalysis</div>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <span>Hoş Geldiniz, {{ user.username }}
+                (Gelir: {{ total_incomes }} ₺ | Gider: {{ total_expenses }} ₺)</span>
+                <a href="/">Anasayfa</a>
+                <a href="{% url 'expense_list' %}">Harcamalar</a>
+                <a href="{% url 'income_list' %}">Gelirler</a>
+                <a href="{% url 'savings_suggestion' %}">Tasarruf Önerileri</a>
+                <a href="{% url 'monthly_spending_chart' %}">Grafikler</a> <!-- Eklenen bağlantı -->
+                <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link" style="padding: 0; border: none; background: none; color: inherit; cursor: pointer;">
+                        Çıkış Yap
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Giriş Yap</a>
+                <a href="{% url 'register' %}">Kayıt Ol</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="footer">
+        <p>© 2024 SpendingHabitAnalysis. Tüm Hakları Saklıdır.</p>
+    </div>
+</body>
+</html>
