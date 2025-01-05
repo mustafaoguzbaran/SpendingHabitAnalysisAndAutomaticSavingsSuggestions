@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Gelir Ekle{% endblock %}
+
+{% block content %}
+<div class="income-container">
+    <h1>Gelir Ekle</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+    </form>
+    <a href="{% url 'income_list' %}" class="btn btn-link">Gelir Listesine Dön</a>
+</div>
+{% endblock %}
