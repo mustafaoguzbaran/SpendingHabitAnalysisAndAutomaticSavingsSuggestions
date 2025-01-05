@@ -1,191 +1,26 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harcama Ekle</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-        }
+{% extends 'base.html' %}
 
-        .navbar {
-            background-color: #4CAF50;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #fff;
-        }
+{% block title %}Harcama Ekle{% endblock %}
 
-        .navbar .logo {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .navbar .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
-        }
-
-        .navbar .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        .expense-container {
-            background: white;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .expense-container h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
-
-        .expense-container form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 80px;
-        }
-
-        .form-group input[type="submit"],
-        .form-group .btn-primary {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-            padding: 12px 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-group input[type="submit"]:hover,
-        .form-group .btn-primary:hover {
-            background-color: #45a049;
-        }
-
-        .btn-link {
-            text-align: center;
-            display: block;
-            margin-top: 15px;
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .btn-link:hover {
-            text-decoration: underline;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 12px;
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
-
-        .footer {
-            background-color: #4CAF50;
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-            margin-top: 40px;
-        }
-
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        @media(max-width: 768px) {
-            .navbar .nav-links {
-                display: none;
-            }
-
-            .expense-container {
-                width: 95%;
-            }
-
-            .form-group input[type="submit"],
-            .form-group .btn-primary {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="navbar">
-        <div class="logo">SpendingHabitAnalysis</div>
-        <div class="nav-links">
-            <a href="#">Anasayfa</a>
-            <a href="#">Harcama Ekle</a>
-            <a href="#">Profil</a>
-        </div>
-    </div>
-
-    <div class="expense-container">
-        <h1>Harcama Ekle</h1>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="error-message">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
+{% block content %}
+<div class="expense-container">
+    <h1>Harcama Ekle</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
             <div class="form-group">
-                <input type="submit" value="Kaydet">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error-message">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
             </div>
-        </form>
-    </div>
-
-    <div class="footer">
-        <p>© 2024 SpendingHabitAnalysis. Tüm Hakları Saklıdır.</p>
-    </div>
-</body>
-</html>
+        {% endfor %}
+        <div class="form-group">
+            <input type="submit" value="Kaydet" class="btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock %}

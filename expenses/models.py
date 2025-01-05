@@ -19,4 +19,15 @@ class Expense(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.amount} - {self.category} - {self.date}"
 
+class Income(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.amount} - {self.category} - {self.date}"
+
+
 
